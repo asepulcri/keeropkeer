@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 from matplotlib import colors
 import matplotlib
 from functions2 import *
+import time
+
+start_time = time.time()
 
 # Initialise board
 # board = np.array(np.zeros((7, 16)))
@@ -17,6 +20,8 @@ from functions2 import *
 game = DividerAlgorithm()
 
 game.run()
+
+print(f'Board generated in {round((time.time() - start_time),2)}')
 
 
 # cmap = colors.ListedColormap(['white', 'red', 'blue', 'green', 'orange', 'yellow'])

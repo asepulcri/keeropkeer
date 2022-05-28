@@ -653,4 +653,4 @@ shapes_of_6: list[Shape] = [
     shape_6_216,
 ]
 
-all_shapes = {1: shapes_of_1, 2: shapes_of_2, 3: shapes_of_3, 4: shapes_of_4, 5: shapes_of_5, 6: shapes_of_6}
+all_shapes = {"1": shapes_of_1, "2": shapes_of_2, "3": shapes_of_3, "4": shapes_of_4, "5": shapes_of_5, "6": shapes_of_6}
