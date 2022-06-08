@@ -1,5 +1,5 @@
 class OverlappingShapeException(Exception):
-    print("Overlapping shapes")
+    pass
 
 class OutofBoundsException(Exception):
-    print("Reached the end of the board")
+    pass

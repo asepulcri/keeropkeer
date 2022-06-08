@@ -3,6 +3,11 @@ from possible_shapes import *
 import random
 from copy import deepcopy
 from exceptions import *
+import time
+from datetime import datetime
+
+BOARD_WIDTH = 7
+BOARD_HEIGHT = 15
 
 
 class DecisionVariable():
@@ -55,7 +60,7 @@ class DividerAlgorithm:
     shape_30: DecisionVariable
 
     def __init__(self):
-        self.board = np.array(np.zeros((7, 15)))
+        self.board = np.array(np.zeros((BOARD_HEIGHT, BOARD_WIDTH)))
         self.shapes = []
 
         self.shape_1 = DecisionVariable(deepcopy(all_shapes))
@@ -132,22 +137,22 @@ class DividerAlgorithm:
                     self.next_coordinate_to_fill = y, x
                     return y, x
 
-    def try_to_place(self, shape: Shape):
+    def try_to_place(self, shape: Shape) -> bool:
         y_board, x_board = self.find_next_coordinate_to_fill()
         for y in range(len(shape.config)):
             for x in range(len(shape.config[y])):
                 try:
                     if x_board + x - shape.leftmost_top_pixel[1] < 0:
-                        raise OutofBoundsException()
+                        return False
                     board_coordinate = self.board[y_board + y][x_board + x - shape.leftmost_top_pixel[1]]
-                except IndexError:
-                    raise OutofBoundsException()
+                except IndexError:  # TODO check for indices instead of causing an exception
+                    return False
                 shape_coordinate = shape.config[y][x]
                 if int(shape_coordinate) == 1 and int(board_coordinate) != 0:
-                    raise OverlappingShapeException()
+                    return False
 
         self.place_shape(shape)
-        return
+        return True
 
     def place_shape(self, shape: Shape):
         y_board, x_board = self.next_coordinate_to_fill
@@ -165,9 +170,10 @@ class DividerAlgorithm:
         return random.choice(possible_shape_sizes)
 
     def run(self):
+        start_time = time.time()
         # for i in range(10000):
         iterations = 0
-        while self.counter < 31:
+        while self.counter < 31 and (time.time() - start_time) <= 10:
             iterations += 1
             next_decision_variable = self.decision_variables[self.counter - 1]
             picked_shape_size_between_1_and_6 = self.pick_random_shape_size_between_1_and_6(next_decision_variable)
@@ -185,15 +191,14 @@ class DividerAlgorithm:
             # noinspection PyBroadException
             picked_shape = random.choice(next_decision_variable.options[str(picked_shape_size_between_1_and_6)])
             next_decision_variable.options[str(picked_shape_size_between_1_and_6)].remove(picked_shape)
-            try:
-                self.try_to_place(picked_shape)
+            successful_placement_possible: bool = self.try_to_place(picked_shape)
+            if successful_placement_possible:
                 next_decision_variable.pick_shape(picked_shape)
                 self.number_of_shapes_per_size[str(picked_shape_size_between_1_and_6)] += 1
                 self.counter += 1
 
                 # print(self.board)
-                # print(self.number_of_shapes_per_size)
                 # print(self.counter)
-            except (OverlappingShapeException, OutofBoundsException):
-                pass
-        print(self.board)
+
+        print(self.number_of_shapes_per_size)
+        print(np.transpose(self.board))
