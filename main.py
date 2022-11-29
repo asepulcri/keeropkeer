@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from matplotlib import colors
 import matplotlib
 from DividerAlgorithm import *
+from ColouringAlgorithm import *
 import time
 
 # Initialise board
@@ -18,7 +19,12 @@ import time
 game = DividerAlgorithm()
 
 start_time = time.time()
-game.run()
+divided_board = game.run()
+
+test_colouring_algorithm = ColouringAlgorithm(np.array(divided_board))
+
+print(test_colouring_algorithm.get_shape_properties(1))
+
 print(f'Board generated in {round((time.time() - start_time), 2)}')
 
 

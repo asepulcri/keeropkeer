@@ -215,3 +215,5 @@ class DividerAlgorithm:
 
         print(self.number_of_shapes_per_size)
         print(np.transpose(self.board))
+        
+        return np.transpose(self.board)

@@ -5,8 +5,7 @@ T = TypeVar("T")
 
 
 class DecisionVariable(Generic[T]):
-    def __init__(self, options: dict[str, list[T]]):
-        self.options = options
+    def __init__(self):
         self.picked = None
 
     def pick_shape(self, option: T):
