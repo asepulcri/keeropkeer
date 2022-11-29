@@ -7,6 +7,18 @@ import time
 BOARD_WIDTH = 7
 BOARD_HEIGHT = 15
 
+
+class ShapeDecisionVariable(DecisionVariable[Shape]):
+    picked: Shape
+
+    def __init__(self, options: dict[str, list[Shape]]):
+        self.options = options
+        self.picked = None
+
+    def pick_shape(self, shape: Shape):
+        self.picked = shape
+
+
 class DividerAlgorithm:
     board: np.ndarray
     shapes: list[Shape]
@@ -14,71 +26,71 @@ class DividerAlgorithm:
 
     number_of_shapes_per_size: dict[str, int]
     counter: int
-    shape_1: DecisionVariable
-    shape_2: DecisionVariable
-    shape_3: DecisionVariable
-    shape_4: DecisionVariable
-    shape_5: DecisionVariable
-    shape_6: DecisionVariable
-    shape_7: DecisionVariable
-    shape_8: DecisionVariable
-    shape_9: DecisionVariable
-    shape_10: DecisionVariable
-    shape_11: DecisionVariable
-    shape_12: DecisionVariable
-    shape_13: DecisionVariable
-    shape_14: DecisionVariable
-    shape_15: DecisionVariable
-    shape_16: DecisionVariable
-    shape_17: DecisionVariable
-    shape_18: DecisionVariable
-    shape_19: DecisionVariable
-    shape_20: DecisionVariable
-    shape_21: DecisionVariable
-    shape_22: DecisionVariable
-    shape_23: DecisionVariable
-    shape_24: DecisionVariable
-    shape_25: DecisionVariable
-    shape_26: DecisionVariable
-    shape_27: DecisionVariable
-    shape_28: DecisionVariable
-    shape_29: DecisionVariable
-    shape_30: DecisionVariable
+    shape_1: ShapeDecisionVariable
+    shape_2: ShapeDecisionVariable
+    shape_3: ShapeDecisionVariable
+    shape_4: ShapeDecisionVariable
+    shape_5: ShapeDecisionVariable
+    shape_6: ShapeDecisionVariable
+    shape_7: ShapeDecisionVariable
+    shape_8: ShapeDecisionVariable
+    shape_9: ShapeDecisionVariable
+    shape_10: ShapeDecisionVariable
+    shape_11: ShapeDecisionVariable
+    shape_12: ShapeDecisionVariable
+    shape_13: ShapeDecisionVariable
+    shape_14: ShapeDecisionVariable
+    shape_15: ShapeDecisionVariable
+    shape_16: ShapeDecisionVariable
+    shape_17: ShapeDecisionVariable
+    shape_18: ShapeDecisionVariable
+    shape_19: ShapeDecisionVariable
+    shape_20: ShapeDecisionVariable
+    shape_21: ShapeDecisionVariable
+    shape_22: ShapeDecisionVariable
+    shape_23: ShapeDecisionVariable
+    shape_24: ShapeDecisionVariable
+    shape_25: ShapeDecisionVariable
+    shape_26: ShapeDecisionVariable
+    shape_27: ShapeDecisionVariable
+    shape_28: ShapeDecisionVariable
+    shape_29: ShapeDecisionVariable
+    shape_30: ShapeDecisionVariable
 
     def __init__(self):
         self.board = np.array(np.zeros((BOARD_HEIGHT, BOARD_WIDTH)))
         self.shapes = []
 
-        self.shape_1 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_2 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_3 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_4 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_5 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_6 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_7 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_8 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_9 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_10 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_11 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_12 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_13 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_14 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_15 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_16 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_17 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_18 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_19 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_20 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_21 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_22 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_23 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_24 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_25 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_26 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_27 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_28 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_29 = DecisionVariable(deepcopy(all_shapes))
-        self.shape_30 = DecisionVariable(deepcopy(all_shapes))
+        self.shape_1 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_2 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_3 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_4 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_5 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_6 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_7 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_8 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_9 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_10 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_11 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_12 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_13 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_14 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_15 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_16 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_17 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_18 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_19 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_20 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_21 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_22 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_23 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_24 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_25 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_26 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_27 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_28 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_29 = ShapeDecisionVariable(deepcopy(all_shapes))
+        self.shape_30 = ShapeDecisionVariable(deepcopy(all_shapes))
 
         self.decision_variables = [
             self.shape_1,
@@ -146,7 +158,7 @@ class DividerAlgorithm:
             for x in range(len(shape.config[y])):
                 self.board[y_board + y, x_board + x - shape.leftmost_top_pixel[1]] += shape.config[y][x] * self.counter
 
-    # def pick_random_shape_size_between_1_and_6(self, decision_variable: DecisionVariable):
+    # def pick_random_shape_size_between_1_and_6(self, decision_variable: ShapeDecisionVariable):
     #     possible_shape_sizes: [int] = []
     #     for size in range(1, 7):
     #         if len(decision_variable.options[str(size)]) > 0 and self.number_of_shapes_per_size[str(size)] < 5:
@@ -158,7 +170,7 @@ class DividerAlgorithm:
     #         weighting.append(2**((5 - self.number_of_shapes_per_size[str(size)])**2))
     #     return random.choices(possible_shape_sizes, weights=weighting)[0]
 
-    def pick_random_shape_size_between_1_and_6(self, decision_variable: DecisionVariable):
+    def pick_random_shape_size_between_1_and_6(self, decision_variable: ShapeDecisionVariable):
         possible_shape_sizes: [int] = []
         for size in range(1, 7):
             if len(decision_variable.options[str(size)]) > 0 and self.number_of_shapes_per_size[str(size)] < 5:
@@ -167,7 +179,7 @@ class DividerAlgorithm:
             return -1
         weighting = []
         for size in possible_shape_sizes:
-            weighting.append(2**((5 - self.number_of_shapes_per_size[str(size)])**2))
+            weighting.append(2 ** ((5 - self.number_of_shapes_per_size[str(size)]) ** 2))
         return random.choices(possible_shape_sizes, weights=weighting)[0]
 
     def run(self):
