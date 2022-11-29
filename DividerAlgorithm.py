@@ -1,25 +1,11 @@
-import numpy as np
+from DecisionVariable import DecisionVariable
 from possible_shapes import *
 import random
 from copy import deepcopy
-from exceptions import *
 import time
-from datetime import datetime
 
 BOARD_WIDTH = 7
 BOARD_HEIGHT = 15
-
-
-class DecisionVariable():
-    picked: Shape
-
-    def __init__(self, options: dict[str, list[Shape]]):
-        self.options = options
-        self.picked = None
-
-    def pick_shape(self, shape: Shape):
-        self.picked = shape
-
 
 class DividerAlgorithm:
     board: np.ndarray
@@ -160,6 +146,18 @@ class DividerAlgorithm:
             for x in range(len(shape.config[y])):
                 self.board[y_board + y, x_board + x - shape.leftmost_top_pixel[1]] += shape.config[y][x] * self.counter
 
+    # def pick_random_shape_size_between_1_and_6(self, decision_variable: DecisionVariable):
+    #     possible_shape_sizes: [int] = []
+    #     for size in range(1, 7):
+    #         if len(decision_variable.options[str(size)]) > 0 and self.number_of_shapes_per_size[str(size)] < 5:
+    #             possible_shape_sizes.append(size)
+    #     if len(possible_shape_sizes) == 0:
+    #         return -1
+    #     weighting = []
+    #     for size in possible_shape_sizes:
+    #         weighting.append(2**((5 - self.number_of_shapes_per_size[str(size)])**2))
+    #     return random.choices(possible_shape_sizes, weights=weighting)[0]
+
     def pick_random_shape_size_between_1_and_6(self, decision_variable: DecisionVariable):
         possible_shape_sizes: [int] = []
         for size in range(1, 7):
@@ -167,7 +165,10 @@ class DividerAlgorithm:
                 possible_shape_sizes.append(size)
         if len(possible_shape_sizes) == 0:
             return -1
-        return random.choice(possible_shape_sizes)
+        weighting = []
+        for size in possible_shape_sizes:
+            weighting.append(2**((5 - self.number_of_shapes_per_size[str(size)])**2))
+        return random.choices(possible_shape_sizes, weights=weighting)[0]
 
     def run(self):
         start_time = time.time()

@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import colors
 import matplotlib
-from functions2 import *
+from DividerAlgorithm import *
 import time
 
 # Initialise board
