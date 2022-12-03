@@ -1,13 +1,15 @@
 import numpy as np
+from typing import Tuple, List
+
 
 class Shape:
-    def __init__(self, config: np.ndarray, size, leftmost_top_pixel: tuple[int, int]):
+    def __init__(self, config: np.ndarray, size, leftmost_top_pixel: Tuple[int, int]):
         self.config = config
         self.size = size
         self.leftmost_top_pixel = leftmost_top_pixel
 
     @staticmethod
-    def find_leftmost_top_pixel(input_array: np.ndarray) -> tuple[int, int]:
+    def find_leftmost_top_pixel(input_array: np.ndarray) -> Tuple[int, int]:
         for i in range(len(input_array[0])):
             if input_array[0, i] == 1:
                 return 0, i
@@ -25,14 +27,15 @@ class Shape:
     def __repr__(self):
         return f"Shape(config: \n{self.config} \nleftmost top pixel: {str(self.leftmost_top_pixel)}"
 
+
 shape_1_1 = Shape(np.array([[1]]), 1, (0, 0))
 
-shapes_of_1: list[Shape] = [shape_1_1]
+shapes_of_1: List[Shape] = [shape_1_1]
 
 shape_2_1 = Shape(np.array([[1, 1]]), 2, (0, 0))
 shape_2_2 = shape_2_1.rotate_clockwise_90()
 
-shapes_of_2: list[Shape] = [
+shapes_of_2: List[Shape] = [
     shape_2_1,
     shape_2_2
 ]
@@ -44,7 +47,7 @@ shape_3_4 = shape_3_3.rotate_clockwise_90()
 shape_3_5 = shape_3_4.rotate_clockwise_90()
 shape_3_6 = shape_3_5.rotate_clockwise_90()
 
-shapes_of_3: list[Shape] = [
+shapes_of_3: List[Shape] = [
     shape_3_1,
     shape_3_2,
     shape_3_3,
@@ -69,7 +72,7 @@ shape_4_13 = shape_4_12.rotate_clockwise_90()
 shape_4_14 = shape_4_13.rotate_clockwise_90()
 shape_4_15 = shape_4_14.rotate_clockwise_90()
 
-shapes_of_4: list[Shape] = [
+shapes_of_4: List[Shape] = [
     shape_4_1,
     shape_4_2,
     shape_4_3,
@@ -151,7 +154,7 @@ shape_5_61 = shape_5_60.rotate_clockwise_90()
 shape_5_62 = shape_5_61.rotate_clockwise_90()
 shape_5_63 = Shape(np.array([[0, 1, 0], [1, 1, 1], [0, 1, 0]]), 5, (0, 1))
 
-shapes_of_5: list[Shape] = [
+shapes_of_5: List[Shape] = [
     shape_5_1,
     shape_5_2,
     shape_5_3,
@@ -434,7 +437,7 @@ shape_6_214 = shape_6_213.rotate_clockwise_90()
 shape_6_215 = shape_6_214.rotate_clockwise_90()
 shape_6_216 = shape_6_215.rotate_clockwise_90()
 
-shapes_of_6: list[Shape] = [
+shapes_of_6: List[Shape] = [
     shape_6_1,
     shape_6_2,
     shape_6_3,
@@ -653,4 +656,5 @@ shapes_of_6: list[Shape] = [
     shape_6_216,
 ]
 
-all_shapes = {"1": shapes_of_1, "2": shapes_of_2, "3": shapes_of_3, "4": shapes_of_4, "5": shapes_of_5, "6": shapes_of_6}
+all_shapes = {"1": shapes_of_1, "2": shapes_of_2, "3": shapes_of_3, "4": shapes_of_4, "5": shapes_of_5,
+              "6": shapes_of_6}

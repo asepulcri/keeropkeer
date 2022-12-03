@@ -1,3 +1,5 @@
+from typing import Dict
+
 from DecisionVariable import DecisionVariable
 from possible_shapes import *
 import random
@@ -11,7 +13,7 @@ BOARD_HEIGHT = 15
 class ShapeDecisionVariable(DecisionVariable[Shape]):
     picked: Shape
 
-    def __init__(self, options: dict[str, list[Shape]]):
+    def __init__(self, options: Dict[str, List[Shape]]):
         self.options = options
         self.picked = None
 
@@ -21,10 +23,10 @@ class ShapeDecisionVariable(DecisionVariable[Shape]):
 
 class DividerAlgorithm:
     board: np.ndarray
-    shapes: list[Shape]
-    next_coordinate_to_fill: tuple[int, int]
+    shapes: List[Shape]
+    next_coordinate_to_fill: Tuple[int, int]
 
-    number_of_shapes_per_size: dict[str, int]
+    number_of_shapes_per_size: Dict[str, int]
     counter: int
     shape_1: ShapeDecisionVariable
     shape_2: ShapeDecisionVariable
