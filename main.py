@@ -21,7 +21,8 @@ game = DividerAlgorithm()
 start_time = time.time()
 divided_board = game.run()
 
-test_colouring_algorithm = ColouringAlgorithm(np.array(divided_board))
+colouring_algorithm = ColouringAlgorithm(np.array(divided_board))
+coloured_board = colouring_algorithm.run()
 
 print(test_colouring_algorithm.get_shape_properties(1))
 
