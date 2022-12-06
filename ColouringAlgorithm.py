@@ -1,9 +1,8 @@
 import numpy as np
 from typing import Set
-
+import networkx as nx
 from DecisionVariable import DecisionVariable
 from copy import deepcopy
-import random
 
 
 class ColourDecisionVariable(DecisionVariable[str]):
@@ -19,6 +18,8 @@ class ColourDecisionVariable(DecisionVariable[str]):
 
 
 class ColouringAlgorithm:
+    colours = ['r', 'o', 'y', 'g', 'b']
+
     def __init__(self, board: np.array(int)):
         self.board = board
         self.current_decision_variable = 1
@@ -27,10 +28,12 @@ class ColouringAlgorithm:
         self.decision_variables = [ColourDecisionVariable() for _ in range(30)]
         self.decision_variables_properties: list[tuple[int, Set[int]]]= [self.get_shape_properties(i) for i in range(1,31)]
 
+        self.shape_numbers_per_size = [[] for i in range(6)]
+
     def get_shape_properties(self, shape_number) -> (int, Set[int]):  # returns size and neighbouring numbers
         indices_current_shape = np.where(self.board == shape_number)
         indices_current_shape = np.dstack(indices_current_shape)
-        size_current_shape = len(indices_current_shape)
+        size_current_shape = np.count_nonzero(self.board == shape_number)
         neighbouring_shape_numbers: Set[int] = set()
 
         for index in indices_current_shape[0]:
@@ -52,51 +55,40 @@ class ColouringAlgorithm:
 
         return neighbouring_shape_numbers
 
-    # def remove_colour_from_neighbours(self, decision_variable: ColourDecisionVariable):
-    #     picked_colour = decision_variable.picked
-    #     neighbours = decision_variable.
-    #
-    #     return
+    def set_shape_numbers_per_size(self):
+        for i, properties in enumerate(self.decision_variables_properties):
+            size, _ = properties
+            self.shape_numbers_per_size[size-1].append(i+1)
+        return
 
-    def is_legal_pick(self, decision_variable_number: int, colour: str) -> bool:
-        decision_variable_properties = self.decision_variables_properties[decision_variable_number - 1]
-        size, neighbouring_numbers = decision_variable_properties
-        for neighbouring_number in neighbouring_numbers:
-            neighbour_decision_variable = self.decision_variables[int(neighbouring_number) - 1]
-            if neighbour_decision_variable.picked == colour:
-                return False
+    def create_network(self) -> nx.Graph:
+        network = nx.Graph()
+        network.add_nodes_from(range(1, 31))
+        for i, properties in enumerate(self.decision_variables_properties):
+            size, neighbours = properties
+            for neighbour in neighbours:
+                network.add_edge(i+1, neighbour)
+            for shape_number in self.shape_numbers_per_size[size-1]:
+                if shape_number != i + 1:
+                    network.add_edge(i+1, shape_number)
+        return network
 
-        for i in range(1, decision_variable_number):
-            decision_variable = self.decision_variables[i - 1]
-
-            if decision_variable.picked == colour and self.decision_variables_properties[i - 1][0] == size:
-                return False
-
-        return True
-
-    def colour_board(self):
-        for i in range(1, 31):
-            colour = self.decision_variables[i-1].picked
-            np.where(self.coloured_board == str(i), colour, self.coloured_board)
-
+    def colour_network(self, network: nx.Graph) -> dict:
+        network_colours_dictionary = nx.greedy_color(G=network, strategy="largest_first", interchange=True)
+        return network_colours_dictionary
 
     def run(self):
-        attempts = 0
-        while self.current_decision_variable < 31 and self.current_decision_variable > 0:
-            attempts += 1
-            decision_variable : ColourDecisionVariable = self.decision_variables[self.current_decision_variable - 1]
-            decision_variable_properties = self.decision_variables_properties[self.current_decision_variable - 1]
-            if len(decision_variable.options) < 1:
-                decision_variable.reset()
-                self.current_decision_variable -= 1
-            colour = random.choice(decision_variable.options)
-            decision_variable.options.remove(colour)
-            if self.is_legal_pick(self.current_decision_variable, colour):
-                decision_variable.picked = colour
-                self.current_decision_variable += 1
+        self.set_shape_numbers_per_size()
 
-        self.colour_board()
+        network = self.create_network()
+
+        network_colours_dictionary = self.colour_network(network)
+
+        print(network_colours_dictionary)
+
+        for key, value in network_colours_dictionary.items():
+            shape_number = key
+            assigned_colour = self.colours[value]
+            self.coloured_board[self.board == shape_number] = assigned_colour
 
         return self.coloured_board
-
-
