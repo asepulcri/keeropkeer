@@ -93,11 +93,10 @@ class ColouringAlgorithm:
         for key, value in network_colours_dictionary.items():
             shape_number = key
             assigned_colour = self.colours[value]
-            self.coloured_board[self.board == shape_number] = assigned_colour
             self.coloured_board_ints[self.board == shape_number] = value
 
         labels = self.coloured_board
         cmap = ListedColormap(['red', 'orange', 'yellow', 'green', 'blue'])
-        sns.heatmap(self.coloured_board_ints, cmap=cmap, annot=labels, fmt='s', cbar=False)
+        sns.heatmap(self.coloured_board_ints, cmap=cmap, annot=self.coloured_board_ints, cbar=False)
         plt.show()
         return
