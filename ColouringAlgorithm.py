@@ -3,6 +3,9 @@ from typing import Set
 import networkx as nx
 from DecisionVariable import DecisionVariable
 from copy import deepcopy
+from matplotlib import pyplot as plt
+import seaborn as sns
+from matplotlib.colors import ListedColormap
 
 
 class ColourDecisionVariable(DecisionVariable[str]):
@@ -24,6 +27,7 @@ class ColouringAlgorithm:
         self.board = board
         self.current_decision_variable = 1
         self.coloured_board = board.astype(str)
+        self.coloured_board_ints = board
 
         self.decision_variables = [ColourDecisionVariable() for _ in range(30)]
         self.decision_variables_properties: list[tuple[int, Set[int]]]= [self.get_shape_properties(i) for i in range(1,31)]
@@ -90,5 +94,10 @@ class ColouringAlgorithm:
             shape_number = key
             assigned_colour = self.colours[value]
             self.coloured_board[self.board == shape_number] = assigned_colour
+            self.coloured_board_ints[self.board == shape_number] = value
 
-        return self.coloured_board
+        labels = self.coloured_board
+        cmap = ListedColormap(['red', 'orange', 'yellow', 'green', 'blue'])
+        sns.heatmap(self.coloured_board_ints, cmap=cmap, annot=labels, fmt='s', cbar=False)
+        plt.show()
+        return
