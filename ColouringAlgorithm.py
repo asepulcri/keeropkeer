@@ -3,9 +3,6 @@ from typing import Set
 import networkx as nx
 from DecisionVariable import DecisionVariable
 from copy import deepcopy
-from matplotlib import pyplot as plt
-import seaborn as sns
-from matplotlib.colors import ListedColormap
 
 
 class ColourDecisionVariable(DecisionVariable[str]):
@@ -74,7 +71,8 @@ class ColouringAlgorithm:
                     network.add_edge(i+1, shape_number)
         return network
 
-    def colour_network(self, network: nx.Graph) -> dict:
+    @staticmethod
+    def colour_network(network: nx.Graph) -> dict:
         network_colours_dictionary = nx.greedy_color(G=network, strategy="largest_first", interchange=True)
         return network_colours_dictionary
 
@@ -83,22 +81,10 @@ class ColouringAlgorithm:
 
         network = self.create_network()
 
-        network_colours_dictionary = self.colour_network(network)
-
-        print(network_colours_dictionary)
+        network_colours_dictionary = ColouringAlgorithm.colour_network(network)
 
         number_of_colours_used = max(network_colours_dictionary.values()) + 1
         if number_of_colours_used > 5:
             exit("Colouring algorithm could not find solution")
 
-        coloured_board_ints = self.board
-
-        for key, value in network_colours_dictionary.items():
-            shape_number = key
-            assigned_colour = self.colours[value]
-            coloured_board_ints[self.board == shape_number] = value
-
-        cmap = ListedColormap(['red', 'orange', 'yellow', 'green', 'blue'])
-        sns.heatmap(coloured_board_ints, cmap=cmap, annot=coloured_board_ints, cbar=False)
-        plt.show()
         return network_colours_dictionary

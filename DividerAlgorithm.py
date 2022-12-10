@@ -160,18 +160,6 @@ class DividerAlgorithm:
             for x in range(len(shape.config[y])):
                 self.board[y_board + y, x_board + x - shape.leftmost_top_pixel[1]] += shape.config[y][x] * self.counter
 
-    # def pick_random_shape_size_between_1_and_6(self, decision_variable: ShapeDecisionVariable):
-    #     possible_shape_sizes: [int] = []
-    #     for size in range(1, 7):
-    #         if len(decision_variable.options[str(size)]) > 0 and self.number_of_shapes_per_size[str(size)] < 5:
-    #             possible_shape_sizes.append(size)
-    #     if len(possible_shape_sizes) == 0:
-    #         return -1
-    #     weighting = []
-    #     for size in possible_shape_sizes:
-    #         weighting.append(2**((5 - self.number_of_shapes_per_size[str(size)])**2))
-    #     return random.choices(possible_shape_sizes, weights=weighting)[0]
-
     def pick_random_shape_size_between_1_and_6(self, decision_variable: ShapeDecisionVariable):
         possible_shape_sizes: [int] = []
         for size in range(1, 7):
@@ -186,7 +174,6 @@ class DividerAlgorithm:
 
     def run(self):
         start_time = time.time()
-        # for i in range(10000):
         iterations = 0
         while self.counter < 31:
             if (time.time() - start_time) > 5:
@@ -200,12 +187,7 @@ class DividerAlgorithm:
                 self.number_of_shapes_per_size[str(self.decision_variables[self.counter - 2].picked.size)] -= 1
                 self.board[self.board == self.counter - 1] = 0
                 self.counter -= 1
-                # if self.number_of_shapes_per_size[5] <= 0:
-                #     pass
                 continue
-            # picked_shape_size = random.randint(0, 5)
-            picked_shape: Shape = None
-            # noinspection PyBroadException
             picked_shape = random.choice(next_decision_variable.options[str(picked_shape_size_between_1_and_6)])
             next_decision_variable.options[str(picked_shape_size_between_1_and_6)].remove(picked_shape)
             successful_placement_possible: bool = self.try_to_place(picked_shape)
@@ -213,11 +195,5 @@ class DividerAlgorithm:
                 next_decision_variable.pick_shape(picked_shape)
                 self.number_of_shapes_per_size[str(picked_shape_size_between_1_and_6)] += 1
                 self.counter += 1
-
-                # print(self.board)
-                # print(self.counter)
-
-        print(self.number_of_shapes_per_size)
-        print(np.transpose(self.board))
         
         return np.transpose(self.board)

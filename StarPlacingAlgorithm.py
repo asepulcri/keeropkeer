@@ -53,6 +53,11 @@ class StarPlacingAlgorithm:
 
             # Check if there are any options
             if len(decision_variable.options) == 0:
+                previous_decision_variable = self.column_decision_variables[self.current_column_index - 1]
+                previous_shape_number = previous_decision_variable.picked_shape_number
+                self.shape_numbers_with_stars.remove(previous_shape_number)
+                previous_colour = self.shape_to_colour_dict[previous_shape_number]
+                self.stars_per_colour[previous_colour] -= 1
                 self.column_decision_variables[self.current_column_index] = ColumnDecisionVariable()
                 self.current_column_index -= 1
                 continue
