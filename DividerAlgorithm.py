@@ -188,7 +188,9 @@ class DividerAlgorithm:
         start_time = time.time()
         # for i in range(10000):
         iterations = 0
-        while self.counter < 31 and (time.time() - start_time) <= 10:
+        while self.counter < 31:
+            if (time.time() - start_time) > 5:
+                return None
             iterations += 1
             next_decision_variable = self.decision_variables[self.counter - 1]
             picked_shape_size_between_1_and_6 = self.pick_random_shape_size_between_1_and_6(next_decision_variable)

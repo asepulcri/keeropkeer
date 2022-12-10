@@ -25,12 +25,9 @@ class ColouringAlgorithm:
 
     def __init__(self, board: np.array(int)):
         self.board = board
-        self.current_decision_variable = 1
-        self.coloured_board = board.astype(str)
-        self.coloured_board_ints = board
 
         self.decision_variables = [ColourDecisionVariable() for _ in range(30)]
-        self.decision_variables_properties: list[tuple[int, Set[int]]]= [self.get_shape_properties(i) for i in range(1,31)]
+        self.decision_variables_properties: list[tuple[int, Set[int]]] = [self.get_shape_properties(i) for i in range(1,31)]
 
         self.shape_numbers_per_size = [[] for i in range(6)]
 
@@ -90,13 +87,18 @@ class ColouringAlgorithm:
 
         print(network_colours_dictionary)
 
+        number_of_colours_used = max(network_colours_dictionary.values()) + 1
+        if number_of_colours_used > 5:
+            exit("Colouring algorithm could not find solution")
+
+        coloured_board_ints = self.board
+
         for key, value in network_colours_dictionary.items():
             shape_number = key
             assigned_colour = self.colours[value]
-            self.coloured_board_ints[self.board == shape_number] = value
+            coloured_board_ints[self.board == shape_number] = value
 
-        labels = self.coloured_board
         cmap = ListedColormap(['red', 'orange', 'yellow', 'green', 'blue'])
-        sns.heatmap(self.coloured_board_ints, cmap=cmap, annot=self.coloured_board_ints, cbar=False)
+        sns.heatmap(coloured_board_ints, cmap=cmap, annot=coloured_board_ints, cbar=False)
         plt.show()
-        return
+        return network_colours_dictionary
