@@ -1,5 +1,5 @@
 from flask import Flask
-from main import generate_board
+from server.main import generate_board
 
 app = Flask(__name__)
 

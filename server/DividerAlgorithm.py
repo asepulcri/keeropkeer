@@ -1,7 +1,7 @@
 from typing import Dict
 
-from DecisionVariable import DecisionVariable
-from possible_shapes import *
+from server.DecisionVariable import DecisionVariable
+from server.possible_shapes import *
 import random
 from copy import deepcopy
 import time
