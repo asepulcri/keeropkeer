@@ -12,7 +12,6 @@ def welcome():
 @app.route('/get-board', methods=['GET'])
 def get_board():
     response = jsonify(generate_board())
-    # response.headers.add("Access-Control-Allow-Origin", "*")
     return response
 
 if __name__ == '__main__':
