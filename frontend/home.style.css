@@ -1,0 +1,28 @@
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden
+}
+
+header {
+    width: 100%;
+    padding: 3em;
+}
+
+h1{
+    margin:0;
+    text-align: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+}
+
+button{
+    margin: 1em auto;
+
+}
+
+main{
+    width: 80vw;
+    margin: 0 auto;
+    align-self: center;
+    display: grid;
+}

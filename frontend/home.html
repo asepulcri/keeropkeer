@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Keer op Keer Board Generator</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+
+    <link rel="stylesheet" href="home.style.css">
+</head>
+<body>
+<header class = "bg-primary"><h1>KEER OP KEER Board Generator</h1></header>
+
+<main>
+    <button 
+        class = "btn btn-primary"
+        onclick=getBoard()>Generate board</button>
+</main>
+
+<script>
+    async function getBoard() {
+        const response = await fetch('http://localhost:105/get-board');
+        const boardJson = await response.json();
+        console.log(boardJson);
+    }
+</script> 
+
+
+</body>
+</html> 
