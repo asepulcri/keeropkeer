@@ -17,7 +17,6 @@ h1{
 
 button{
     margin: 1em auto;
-
 }
 
 main{
@@ -25,4 +24,29 @@ main{
     margin: 0 auto;
     align-self: center;
     display: grid;
+}
+
+.square {
+    float: left;
+    height: 20px;
+    width: 20px;
+    margin-bottom: 15px;
+    border: 1px solid black;
+    clear: both;
+}
+
+.colour0 {
+    background-color: red;
+}
+.colour1 {
+    background-color: orange;
+}
+.colour2 {
+    background-color: yellow;
+}
+.colour3 {
+    background-color: blue;
+}
+.colour5 {
+    background-color: green;
 }

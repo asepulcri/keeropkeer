@@ -2,10 +2,12 @@ import numpy as np
 import copy
 import random
 
+from typing import List, Dict
+
 
 class ColumnDecisionVariable:
     row_indices = [i for i in range(7)]
-    options: list[int]
+    options: List[int]
 
     def __init__(self):
         self.picked_row_index: int = -1
@@ -23,13 +25,13 @@ class ColumnDecisionVariable:
 
 class StarPlacingAlgorithm:
 
-    def __init__(self, board: np.array(int), shape_to_colour_dict: dict[int, int]):
+    def __init__(self, board: np.array(int), shape_to_colour_dict: Dict[int, int]):
         self.board = board
         self.shape_to_colour_dict = shape_to_colour_dict
         self.column_decision_variables = [ColumnDecisionVariable() for i in range(15)]
         self.current_column_index: int = 0
         self.stars_per_colour = [0 for i in range(5)]
-        self.shape_numbers_with_stars: list[int] = []
+        self.shape_numbers_with_stars: List[int] = []
 
     def is_legal(self, picked_row_index: int, picked_shape_number: int, picked_shape_colour: int) -> bool:
         x = self.current_column_index
