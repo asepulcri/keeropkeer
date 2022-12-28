@@ -26,3 +26,43 @@ main{
     align-self: center;
     display: grid;
 }
+
+.board {
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: rgb(13, 49, 45);
+    padding: 1em;
+    gap: 1em;
+}
+
+.square {
+    aspect-ratio: 1/ 1;
+    display: flex;
+    align-items: center;
+    border-radius: 1em;
+}
+
+.red {
+    background-color: red;
+}
+
+.orange {
+    background-color: orange;
+}
+
+.yellow {
+    background-color: rgb(255, 230, 0);
+}
+
+.blue {
+    background-color: rgb(45, 77, 255);
+}
+
+.green {
+    background-color: green;
+}
+
+.middle{
+    outline: solid 1em white;
+}
