@@ -50,6 +50,8 @@
     function displayBoard(board, stars) {
       const htmlBoard = document.getElementById("gameBoard");
 
+      htmlBoard.innerHTML = "";
+
       for (let row = 0; row < board.length; row++) {
           for (let column = 0; column < board[row].length; column++){
             const hasStar = stars[column] == row;

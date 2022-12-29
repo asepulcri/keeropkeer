@@ -28,7 +28,7 @@ main{
 
 .board {
     display: grid;
-    width: 60%;
+    width: 100%;
     grid-template-columns: repeat(15, 1fr);
     background-color: rgb(13, 49, 45);
     padding: 1em;
@@ -39,7 +39,7 @@ main{
     aspect-ratio: 1/ 1;
     display: flex;
     align-items: center;
-    border-radius: 1em;
+    border-radius: 16%;
 }
 
 .colour0 {
@@ -63,5 +63,5 @@ main{
 }
 
 .middle{
-    outline: solid 1em white;
+    outline: solid 10px white;
 }
