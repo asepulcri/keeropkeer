@@ -29,7 +29,7 @@ main{
 .board {
     display: grid;
     width: 60%;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(15, 1fr);
     background-color: rgb(13, 49, 45);
     padding: 1em;
     gap: 1em;
@@ -42,23 +42,23 @@ main{
     border-radius: 1em;
 }
 
-.red {
+.colour0 {
     background-color: red;
 }
 
-.orange {
+.colour1 {
     background-color: orange;
 }
 
-.yellow {
+.colour2 {
     background-color: rgb(255, 230, 0);
 }
 
-.blue {
+.colour3 {
     background-color: rgb(45, 77, 255);
 }
 
-.green {
+.colour4 {
     background-color: green;
 }
 
