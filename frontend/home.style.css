@@ -26,27 +26,42 @@ main{
     display: grid;
 }
 
-.square {
-    float: left;
-    height: 20px;
-    width: 20px;
-    margin-bottom: 15px;
-    border: 1px solid black;
-    clear: both;
+.board {
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: rgb(13, 49, 45);
+    padding: 1em;
+    gap: 1em;
 }
 
-.colour0 {
+.square {
+    aspect-ratio: 1/ 1;
+    display: flex;
+    align-items: center;
+    border-radius: 1em;
+}
+
+.red {
     background-color: red;
 }
-.colour1 {
+
+.orange {
     background-color: orange;
 }
-.colour2 {
-    background-color: yellow;
+
+.yellow {
+    background-color: rgb(255, 230, 0);
 }
-.colour3 {
-    background-color: blue;
+
+.blue {
+    background-color: rgb(45, 77, 255);
 }
-.colour5 {
+
+.green {
     background-color: green;
+}
+
+.middle{
+    outline: solid 1em white;
 }
