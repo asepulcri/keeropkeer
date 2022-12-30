@@ -69,7 +69,18 @@
         const square = document.createElement("div");
         square.classList.add("square")
         square.classList.add("colour" + colour)
-        if (hasStar) square.classList.add("star")
+        if (hasStar){
+          const starSVG = document.createElement("img");
+          starSVG.classList.add("bgimg");
+          starSVG.src = "./shapes/star.svg"
+          square.appendChild(starSVG);
+        }
+        else{
+          const circleSVG = document.createElement("img");
+          circleSVG.classList.add("bgimg");
+          circleSVG.src = "./shapes/circle.svg"
+          square.appendChild(circleSVG);
+        }
         if (isMiddle) square.classList.add("middle")
 
         return square
