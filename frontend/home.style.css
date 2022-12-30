@@ -16,7 +16,7 @@ h1{
 }
 
 button{
-    margin: 1em auto;
+    margin: 1em 1em;
 }
 
 main{
@@ -32,7 +32,7 @@ main{
     grid-template-columns: repeat(15, 1fr);
     background-color: rgb(13, 49, 45);
     padding: 1em;
-    gap: 1em;
+    /* gap: 1em; */
     margin-bottom: 1em;
 }
 
@@ -40,6 +40,13 @@ main{
     aspect-ratio: 1/ 1;
     display: flex;
     align-items: center;
+    border-radius: 16%;
+    margin: 6%;
+}
+
+.outerSquare {
+    margin: -1%;
+    background-color: white;
     border-radius: 16%;
 }
 
@@ -71,4 +78,9 @@ main{
     opacity: 0.5;
     margin: auto;
     width: 90%;
+}
+
+.button-menu {
+    display: flex;
+    justify-content: center;
 }
