@@ -33,6 +33,7 @@ main{
     background-color: rgb(13, 49, 45);
     padding: 1em;
     gap: 1em;
+    margin-bottom: 1em;
 }
 
 .square {

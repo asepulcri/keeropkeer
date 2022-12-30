@@ -27,14 +27,17 @@
 
 <script>
     async function getBoard() {
+      try {
         showLoader();
         document.getElementById("get-board-button").classList.add("disabled")
         const response = await fetch('http://localhost:105/get-board');
         const boardJson = await response.json();
-        console.log(boardJson);
         document.getElementById("get-board-button").classList.remove("disabled")
         displayBoard(boardJson.board, boardJson.stars);
         hideLoader();
+      } catch (error) {
+        return getBoard()
+      }
     }
 
     function showLoader() {
@@ -58,7 +61,6 @@
             const colour = board[row][column];
             const isMiddle = column == 7;
             const htmlSquare = makeSquare(colour, hasStar, isMiddle);
-            console.log(htmlSquare);
             htmlBoard.appendChild(htmlSquare);
           }
         }
@@ -69,18 +71,15 @@
         const square = document.createElement("div");
         square.classList.add("square")
         square.classList.add("colour" + colour)
+        const image = document.createElement("img");
+        image.classList.add("bgimg");
         if (hasStar){
-          const starSVG = document.createElement("img");
-          starSVG.classList.add("bgimg");
-          starSVG.src = "./shapes/star.svg"
-          square.appendChild(starSVG);
+          image.src = "./shapes/star.svg"
         }
         else{
-          const circleSVG = document.createElement("img");
-          circleSVG.classList.add("bgimg");
-          circleSVG.src = "./shapes/circle.svg"
-          square.appendChild(circleSVG);
+          image.src = "./shapes/circle.svg"
         }
+        square.appendChild(image);
         if (isMiddle) square.classList.add("middle")
 
         return square
