@@ -85,10 +85,11 @@
         const image = document.createElement("img");
         image.classList.add("bgimg");
         if (hasStar){
-          image.src = "./shapes/star.svg"
+          image.src = "./shapes/star-outline.svg"
         }
         else{
           image.src = "./shapes/circle.svg"
+          image.classList.add("circle")
         }
         square.appendChild(image);
         if (isMiddle) {

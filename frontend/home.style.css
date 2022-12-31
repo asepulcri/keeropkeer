@@ -51,15 +51,15 @@ main{
 }
 
 .colour0 {
-    background-color: red;
+    background-color: rgb(252, 20, 70);
 }
 
 .colour1 {
-    background-color: orange;
+    background-color: rgb(228, 133, 0);
 }
 
 .colour2 {
-    background-color: rgb(211, 190, 0);
+    background-color: rgb(280, 217, 2);
 }
 
 .colour3 {
@@ -75,9 +75,12 @@ main{
 }
 
 .bgimg {
-    opacity: 0.5;
     margin: auto;
     width: 90%;
+}
+
+.circle {
+    opacity: 0.5;
 }
 
 .button-menu {
