@@ -26,13 +26,23 @@ main{
     display: grid;
 }
 
-.board {
+.outerBoard {
+    display: grid;
+    width: 100%;
+    background-color: rgb(13, 49, 45);
+    grid-auto-flow: column dense;
+    grid-template: 
+        "columnNames" 1fr
+        "innerBoard" 1fr
+        "columnValues" 1fr
+        "jokers" 1fr
+}
+
+.innerBoard {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(15, 1fr);
-    background-color: rgb(13, 49, 45);
     padding: 1em;
-    /* gap: 1em; */
     margin-bottom: 1em;
 }
 
@@ -70,8 +80,8 @@ main{
     background-color: green;
 }
 
-.middle {
-    outline: solid 10px white;
+.square-neutral {
+    background-color: white;
 }
 
 .bgimg {
@@ -86,4 +96,9 @@ main{
 .button-menu {
     display: flex;
     justify-content: center;
+}
+
+.surroundingRow {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
 }

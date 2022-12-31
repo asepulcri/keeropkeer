@@ -32,12 +32,29 @@
             hidden></span>
     </button>
     </div>
-
-    <div class = "board" id = "gameBoard"></div>
+    <div class = "outerBoard">
+        <div class = "columnNames surroundingRow" id = "columnNames"></div>
+        <div class = "innerBoard" id = "gameBoard"></div>
+        <div class = "columnValues surroundingRow"></div>
+        <div class = "jokers"></div>
+    </div>
 </main>
 
+<script>
+    const columnNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"];
+    columnNamesHTML = document.getElementById("columnNames")
+    columnNames.forEach(columnName => {
+        const name = document.createElement("div");
+        name.classList.add("square", "square-neutral");
+        columnNamesHTML.appendChild(name);
+    })
+
+</script>
 
 <script>
+    startupBoard = {board:[[0,1,1,2,2,2,0,0,1,1,1,4,4,4,4],[0,0,2,2,3,3,4,4,4,0,3,3,3,3,4],[4,4,3,3,4,3,2,4,3,0,1,1,1,1,1],[1,4,0,0,0,3,3,0,0,0,0,4,4,4,2],[0,4,0,3,3,1,2,2,2,3,3,3,3,3,2],[2,4,4,1,3,1,0,4,4,2,2,3,2,2,2],[2,2,2,1,1,1,0,0,0,0,1,1,1,1,2]], stars:[0,5,0,4,6,2,1,3,4,6,5,3,1,5,2]}
+    displayBoard(startupBoard.board, startupBoard.stars)
+
     async function getBoard() {
       try {
         showLoader();
