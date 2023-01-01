@@ -9,9 +9,12 @@ header {
     padding: 3em;
 }
 
-h1{
+h1 {
     margin:0;
     text-align: center;
+}
+
+h1, .text {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
 }
 
@@ -32,18 +35,20 @@ main{
     background-color: rgb(13, 49, 45);
     grid-auto-flow: column dense;
     grid-template: 
-        "columnNames" 1fr
-        "innerBoard" 1fr
-        "columnValues" 1fr
-        "jokers" 1fr
+        "columnNames"
+        "innerBoard"
+        "columnValues"
+        "jokers";
+    
+    padding: 1%;
+    margin-bottom: 1%;
 }
 
 .innerBoard {
     display: grid;
     width: 100%;
     grid-template-columns: repeat(15, 1fr);
-    padding: 1em;
-    margin-bottom: 1em;
+    padding: 1% 0%;
 }
 
 .square {
@@ -82,6 +87,9 @@ main{
 
 .square-neutral {
     background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .bgimg {
@@ -101,4 +109,8 @@ main{
 .surroundingRow {
     display: grid;
     grid-template-columns: repeat(15, 1fr);
+}
+
+.text {
+    font-size: 2.5vw;
 }
