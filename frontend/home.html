@@ -33,10 +33,32 @@
     </button>
     </div>
     <div class = "outerBoard">
-        <div class = "columnNames surroundingRow" id = "columnNames"></div>
-        <div class = "innerBoard" id = "gameBoard"></div>
-        <div class = "columnValues surroundingRow" id = "columnValues"></div>
-        <div class = "jokers"></div>
+        <div class = "left-side" >        
+            <div class = "columnNames surroundingRow" id = "columnNames"></div>
+            <div class = "innerBoard" id = "gameBoard"></div>
+            <div class = "columnValues surroundingRow" id = "columnValues"></div>
+            <div class = "jokers surroundingRow" id = "jokers"></div>
+        </div>
+
+        <div class = "right-side">
+            <div class = "colour-points" id = "colour-points"></div>
+            <div class = "lower-right-side" id = "lower-right-side">
+                <div class="words text"><span>BONUS</span></div>
+                <div class="sum text"><span>=</span></div>
+
+                <div class="words text"><span>A-O</span></div>
+                <div class="sum text"><span>+</span></div>
+
+                <div class="words text"><span>❕ (+1)</span></div>
+                <div class="sum text"><span>+</span></div>
+
+                <div class="words text"><span>⭐ (-2)</span></div>
+                <div class="sum text"><span>-</span></div>
+
+                <div class="words text"><span>TOTAL</span></div>
+                <div class="sum text"><span>=</span></div>
+            </div>
+        </div>
     </div>
 </main>
 
@@ -69,6 +91,39 @@
         value.appendChild(number);
         columnValuesHTML.appendChild(value);
     })
+
+    const jokersHTML = document.getElementById("jokers")
+    for(i = 0; i < 8; i++)
+    {
+        const joker = document.createElement("div");
+        joker.classList.add("square", "square-neutral");
+        const symbol = document.createElement("span")
+        symbol.classList.add("text");
+        symbol.insertAdjacentText('afterbegin', "❕");
+        joker.appendChild(symbol);
+        jokersHTML.appendChild(joker);
+    }
+
+    const colourPointsHTML = document.getElementById("colour-points")
+    for(i = 0; i < 5; i++)
+    {
+        const squareLeft = document.createElement("div");
+        squareLeft.classList.add("square", `colour${i}`);
+        const pointsLeft = document.createElement("span")
+        pointsLeft.classList.add("text");
+        pointsLeft.insertAdjacentText('afterbegin', "5");
+        squareLeft.appendChild(pointsLeft);
+        colourPointsHTML.appendChild(squareLeft);
+
+        const squareRight = document.createElement("div");
+        squareRight.classList.add("square", `colour${i}`);
+        const pointsRight = document.createElement("span")
+        pointsRight.classList.add("text");
+        pointsRight.insertAdjacentText('afterbegin', "3");
+        squareRight.appendChild(pointsRight);
+        colourPointsHTML.appendChild(squareRight);
+    }
+
 </script>
 
 <script>

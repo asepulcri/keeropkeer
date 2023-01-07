@@ -35,10 +35,8 @@ main{
     background-color: rgb(13, 49, 45);
     grid-auto-flow: column dense;
     grid-template: 
-        "columnNames"
-        "innerBoard"
-        "columnValues"
-        "jokers";
+        "left-side right-side"
+        / 80% 20%;
     
     padding: 1%;
     margin-bottom: 1%;
@@ -56,7 +54,7 @@ main{
     display: flex;
     align-items: center;
     border-radius: 16%;
-    margin: 6%;
+    margin: 3%;
 }
 
 .outerSquare {
@@ -109,8 +107,63 @@ main{
 .surroundingRow {
     display: grid;
     grid-template-columns: repeat(15, 1fr);
+    padding: 0.5% 0%;
 }
 
 .text {
     font-size: 2.5vw;
+}
+
+.left-side {
+    grid-area: left-side;
+}
+
+.right-side {
+    grid-area: right-side;
+    display: grid;
+    grid-template: 
+        ".                colour-points"
+        "lower-right-side lower-right-side"
+        / 1fr 1fr;
+}
+
+.colour-points {
+    grid-area: colour-points;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.colour-points > .square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(0, 0, 0, 0.4);
+}
+
+.words {
+    display: grid;
+    color: white;
+}
+
+.words > span{
+    display: flex;
+    justify-content: right;
+    font-size: 2vw;
+    align-items: center;
+    padding-right: 10%;
+}
+
+.sum {
+    aspect-ratio: 2/ 1;
+    background-color: white;
+    display: flex;
+    border-radius: 16%;
+    margin: 3%;
+    padding-left: 10%;
+}
+
+.lower-right-side {
+    grid-area: lower-right-side;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
