@@ -3,7 +3,7 @@
 <head>
 <title>Keer op Keer Board Generator</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" href="home.style.css">
+    <link rel="stylesheet" href="home2.style.css">
 </head>
 <body>
 <header class = "bg-primary"><h1>KEER OP KEER Board Generator</h1></header>
@@ -33,12 +33,12 @@
     </button>
     </div>
     <div class = "outerBoard">
-        <div class = "left-side" >        
+        <!-- <div class = "left-side" >         -->
             <div class = "columnNames surroundingRow" id = "columnNames"></div>
             <div class = "innerBoard" id = "gameBoard"></div>
             <div class = "columnValues surroundingRow" id = "columnValues"></div>
             <div class = "jokers surroundingRow" id = "jokers"></div>
-        </div>
+        <!-- </div> -->
 
         <div class = "right-side">
             <div class = "colour-points" id = "colour-points"></div>
@@ -176,13 +176,13 @@
         square.classList.add("colour" + colour)
         const image = document.createElement("img");
         image.classList.add("bgimg");
-        if (hasStar){
-          image.src = "./shapes/star-outline.svg"
-        }
-        else{
-          image.src = "./shapes/circle.svg"
-          image.classList.add("circle")
-        }
+        // if (hasStar){
+        //   image.src = "./shapes/star-outline.svg"
+        // }
+        // else{
+        //   image.src = "./shapes/circle.svg"
+        //   image.classList.add("circle")
+        // }
         square.appendChild(image);
         if (isMiddle) {
           const oldSquare = square;

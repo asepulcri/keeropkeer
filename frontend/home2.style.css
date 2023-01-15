@@ -23,7 +23,7 @@ button{
 }
 
 main{
-    width: 80vw;
+    /* width: 80vw; */
     margin: 0 auto;
     align-self: center;
     display: grid;
@@ -31,27 +31,47 @@ main{
 
 .outerBoard {
     display: grid;
-    width: 100%;
+    /* width: 100%; */
     background-color: rgb(13, 49, 45);
     grid-auto-flow: column dense;
     grid-template: 
-        "left-side right-side"
-        / 80% 20%;
+        "letters right-side" 1fr
+        "innerBoard right-side" 7fr
+        "columnValues right-side" 2fr
+        "jokers right-side" 1fr
+        / 15fr 4fr;
     
     padding: 1%;
     margin-bottom: 1%;
     height: 96vh;
 }
 
+.columnNames {
+    grid-area: letters;
+    background-color: aquamarine;
+}
+
 .innerBoard {
+    grid-area: innerBoard;
     display: grid;
     width: 100%;
     grid-template-columns: repeat(15, 1fr);
     padding: 1% 0%;
+    background-color: cadetblue;
+}
+
+.columnValues {
+    grid-area: columnValues;
+    background-color: burlywood;
+}
+
+.jokers {
+    grid-area: jokers;
+    background-color: saddlebrown;
 }
 
 .square {
-    aspect-ratio: 1/ 1;
+    /* aspect-ratio: 1/ 1; */
     display: flex;
     align-items: center;
     border-radius: 16%;
@@ -93,6 +113,7 @@ main{
 .bgimg {
     margin: auto;
     width: 90%;
+    height: 90%;
 }
 
 .circle {
@@ -111,12 +132,12 @@ main{
 }
 
 .text {
-    font-size: 2.5vw;
+    /* font-size: 2.5vw; */
 }
 
-.left-side {
+/* .left-side {
     grid-area: left-side;
-}
+} */
 
 .right-side {
     grid-area: right-side;
@@ -148,13 +169,13 @@ main{
 .words > span{
     display: flex;
     justify-content: right;
-    font-size: 2vw;
+    /* font-size: 2vw; */
     align-items: center;
     padding-right: 10%;
 }
 
 .sum {
-    aspect-ratio: 2/ 1;
+    /* aspect-ratio: 2/ 1; */
     background-color: white;
     display: flex;
     border-radius: 16%;
