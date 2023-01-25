@@ -185,15 +185,22 @@
         square.classList.add("square")
         square.classList.add("colour" + colour)
         const image = document.createElement("img");
-        image.classList.add("bgimg");
         if (hasStar){
-          image.src = "./shapes/star.svg"
+            image.src = "./shapes/star.svg"
+            image.classList.add("star");
+            square.appendChild(image);
+
+            const innerStar = document.createElement("img");
+            innerStar.classList.add("filter" + colour);
+            innerStar.classList.add("star");
+            innerStar.src = ("./shapes/star-" + colour + ".svg")
+            square.appendChild(innerStar);
         }
         else{
           image.src = "./shapes/circle.svg"
           image.classList.add("circle")
+          square.appendChild(image);
         }
-        square.appendChild(image);
         if (isMiddle) {
           const oldSquare = square;
           const outerSquare = document.createElement("div");
@@ -210,7 +217,7 @@
 <script> 
 
 document.getElementById("save-board-button").addEventListener("click", function() {
-	html2canvas(document.getElementById("outerBoard", {allowTaint: true})).then(function (canvas) {			
+	html2canvas(document.getElementById("outerBoard", {allowTaint: true, foreignObjectRendering: true, useCORS: true})).then(function (canvas) {			
         var anchorTag = document.createElement("a");
         document.body.appendChild(anchorTag);
         document.getElementById("previewImg").appendChild(canvas);
