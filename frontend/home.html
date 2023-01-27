@@ -18,9 +18,8 @@
 <main>
     <div class = "button-menu">
       <button 
-        id="get-board-button"
-        class = "btn btn-primary"
-        onclick = getBoard()>
+        id="generate-board-button"
+        class = "btn btn-primary">
             Generate board 
             <span 
                 class="loader spinner-border spinner-border-sm" 
@@ -28,7 +27,7 @@
                 hidden></span>
     </button>
 
-    <button 
+    <!-- <button 
     id="save-board-button"
     class = "btn btn-primary">
         Download board 
@@ -36,7 +35,7 @@
             class="loader spinner-border spinner-border-sm" 
             role="status" aria-hidden="true"
             hidden></span>
-    </button>
+    </button> -->
     </div>
     <div id="outerBoard" class = "outerBoard">
         <div class = "left-side" >        
@@ -66,8 +65,7 @@
             </div>
         </div>
     </div>
-    
-    <h3>Preview :</h3>
+
     <div id="previewImg">
     </div>
 </main>
@@ -139,14 +137,32 @@
 <script>
     startupBoard = {board:[[0,1,1,2,2,2,0,0,1,1,1,4,4,4,4],[0,0,2,2,3,3,4,4,4,0,3,3,3,3,4],[4,4,3,3,4,3,2,4,3,0,1,1,1,1,1],[1,4,0,0,0,3,3,0,0,0,0,4,4,4,2],[0,4,0,3,3,1,2,2,2,3,3,3,3,3,2],[2,4,4,1,3,1,0,4,4,2,2,3,2,2,2],[2,2,2,1,1,1,0,0,0,0,1,1,1,1,2]], stars:[0,5,0,4,6,2,1,3,4,6,5,3,1,5,2]}
     displayBoard(startupBoard.board, startupBoard.stars)
+    convertHTMLToImage();
+    hideHTMLBoard();
+    
+    function convertHTMLToImage() {
+        html2canvas(document.getElementById("outerBoard")).then(function (canvas) {	
+            document.getElementById("previewImg").appendChild(canvas);
+        });
+    }
+
+    function hideHTMLBoard() {
+        const htmlBoard = document.getElementById("outerBoard");
+        htmlBoard.hidden = true;
+    }
+
+    function showHTMLBoard() {
+        const htmlBoard = document.getElementById("outerBoard");
+        htmlBoard.hidden = false;
+    }
 
     async function getBoard() {
       try {
         showLoader();
-        document.getElementById("get-board-button").classList.add("disabled")
+        document.getElementById("generate-board-button").classList.add("disabled")
         const response = await fetch('http://localhost:105/get-board');
         const boardJson = await response.json();
-        document.getElementById("get-board-button").classList.remove("disabled")
+        document.getElementById("generate-board-button").classList.remove("disabled")
         displayBoard(boardJson.board, boardJson.stars);
         hideLoader();
       } catch (error) {
@@ -216,48 +232,14 @@
 <!-- Download board script -->
 <script> 
 
-document.getElementById("save-board-button").addEventListener("click", function() {
-	html2canvas(document.getElementById("outerBoard", {allowTaint: true, foreignObjectRendering: true, useCORS: true})).then(function (canvas) {			
-        var anchorTag = document.createElement("a");
-        document.body.appendChild(anchorTag);
-        document.getElementById("previewImg").appendChild(canvas);
-        anchorTag.download = "filename.jpg";
-        anchorTag.href = canvas.toDataURL();
-        anchorTag.target = '_blank';
-        anchorTag.click();
+    document.getElementById("generate-board-button").addEventListener("click", async function() {
+        await getBoard();
+        var oldImage = document.getElementById("previewImg");
+        oldImage.innerHTML = "" ;
+        showHTMLBoard();
+        convertHTMLToImage();
+        hideHTMLBoard();
     });
- });
-
-// document.getElementById("save-board-button").addEventListener("click", function() {
-// 	let canvas = html2canvas(document.getElementById("outerBoard"));
-//     // .then(function (canvas) {		
-//     console.log(canvas);
-//     var anchorTag = document.createElement("a");
-//     document.body.appendChild(anchorTag);
-//     document.getElementById("previewImg").appendChild(canvas);
-//     anchorTag.download = "filename.jpg";
-//     anchorTag.href = canvas.toDataURL();
-//     anchorTag.target = '_blank';
-//     anchorTag.click();
-//     // });
-//  });
-
-// function downloadBoard(){
-//     html2canvas(document.getElementById("outerBoard"))
-//     .then(res => {
-//         console.log(res);
-//         return res;
-//     })
-//     .then(canvas => {
-//         var anchorTag = document.createElement("a");
-//         document.body.appendChild(anchorTag);
-//         document.getElementById("previewImg").appendChild(canvas);
-//         anchorTag.download = "filename.png";
-//         anchorTag.href = canvas.toDataURL();
-//         anchorTag.target = '_blank';
-//         anchorTag.click();
-//     });
-// };
 </script>
 
 
