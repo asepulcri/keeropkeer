@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <link rel="icon" href="favicon.ico">
     <title>Keer op Keer Board Generator</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="home.style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <!-- <script src="html2canvas/jquery-3.6.3.min.js" type="text/javascript"></script>  -->
     <!-- <script src="html2canvas/html2canvas.js" type="text/javascript"></script> -->
 </head>
+
 <body>
-<header class = "bg-primary"><h1>KEER OP KEER Board Generator</h1></header>
+    <header class="bg-primary">
+        <h1>KEER OP KEER Board Generator</h1>
+    </header>
 
-<main>
-    <div class = "button-menu">
-      <button 
-        id="generate-board-button"
-        class = "btn btn-primary">
-            Generate board 
-            <span 
-                class="loader spinner-border spinner-border-sm" 
-                role="status" aria-hidden="true"
-                hidden></span>
-    </button>
+    <main>
+        <div class="button-menu">
+            <button id="generate-board-button" class="btn btn-primary">
+                Generate board
+                <span class="loader spinner-border spinner-border-sm" role="status" aria-hidden="true" hidden></span>
+            </button>
 
-    <!-- <button 
+            <!-- <button 
     id="save-board-button"
     class = "btn btn-primary">
         Download board 
@@ -37,212 +37,219 @@
             role="status" aria-hidden="true"
             hidden></span>
     </button> -->
-    </div>
-    <div id="outerBoard" class = "outerBoard">
-        <div class = "left-side" >        
-            <div class = "columnNames surroundingRow" id = "columnNames"></div>
-            <div class = "innerBoard" id = "gameBoard"></div>
-            <div class = "columnValues surroundingRow" id = "columnValues"></div>
-            <div class = "jokers surroundingRow" id = "jokers"></div>
         </div>
+        <div id="outerBoard" class="outerBoard">
+            <div class="left-side">
+                <div class="columnNames surroundingRow" id="columnNames"></div>
+                <div class="innerBoard" id="gameBoard"></div>
+                <div class="columnValues surroundingRow" id="columnValues"></div>
+                <div class="jokers surroundingRow" id="jokers"></div>
+            </div>
 
-        <div class = "right-side">
-            <div class = "colour-points" id = "colour-points"></div>
-            <div class = "lower-right-side" id = "lower-right-side">
-                <div class="words text"><span>BONUS</span></div>
-                <div class="sum text"><span>=</span></div>
+            <div class="right-side">
+                <div class="colour-points" id="colour-points"></div>
+                <div class="lower-right-side" id="lower-right-side">
+                    <div class="words text"><span>BONUS</span></div>
+                    <div class="sum text"><span>=</span></div>
 
-                <div class="words text"><span>A-O</span></div>
-                <div class="sum text"><span>+</span></div>
+                    <div class="words text"><span>A-O</span></div>
+                    <div class="sum text"><span>+</span></div>
 
-                <div class="words text"><span>❕ (+1)</span></div>
-                <div class="sum text"><span>+</span></div>
+                    <div class="words text"><span>❕ (+1)</span></div>
+                    <div class="sum text"><span>+</span></div>
 
-                <div class="words text"><span>⭐ (-2)</span></div>
-                <div class="sum text"><span>-</span></div>
+                    <div class="words text"><span>⭐ (-2)</span></div>
+                    <div class="sum text"><span>-</span></div>
 
-                <div class="words text"><span>TOTAL</span></div>
-                <div class="sum text"><span>=</span></div>
+                    <div class="words text"><span>TOTAL</span></div>
+                    <div class="sum text"><span>=</span></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="previewImg">
-    </div>
-</main>
-<footer><p>Created by Andrea and Nadia. Delft 2023.</p></footer>
+        <div id="previewImg">
+        </div>
+    </main>
+    <footer>
+        <p>Created by Andrea and Nadia. Delft 2023.</p>
+    </footer>
 
-<!-- jQuery library -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.6/dist/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 
-<script>
-    const columnNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"];
-    const columnNamesHTML = document.getElementById("columnNames")
-    columnNames.forEach(columnName => {
-        const name = document.createElement("div");
-        name.classList.add("square", "square-neutral");
-        const letter = document.createElement("span")
-        letter.classList.add("text");
-        letter.insertAdjacentText('afterbegin', columnName);
-        name.appendChild(letter);
-        columnNamesHTML.appendChild(name);
-    })
+    <script>
+        const columnNames = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"];
+        const columnNamesHTML = document.getElementById("columnNames")
+        columnNames.forEach(columnName => {
+            const name = document.createElement("div");
+            name.classList.add("square", "square-neutral");
+            const letter = document.createElement("span")
+            letter.classList.add("text");
+            letter.insertAdjacentText('afterbegin', columnName);
+            name.appendChild(letter);
+            columnNamesHTML.appendChild(name);
+        })
 
-    const columnValues = [5, 3, 3, 3, 2, 2, 2, 1, 2, 2, 2, 3, 3, 3, 5, 3, 2, 2, 2, 1, 1, 1, 0, 1, 1, 1, 2, 2, 2, 3];
-    const columnValuesHTML = document.getElementById("columnValues")
-    columnValues.forEach(columnValue => {
-        const value = document.createElement("div");
-        value.classList.add("square", "square-neutral");
-        const number = document.createElement("span")
-        number.classList.add("text");
-        number.insertAdjacentText('afterbegin', columnValue);
-        value.appendChild(number);
-        columnValuesHTML.appendChild(value);
-    })
+        const columnValues = [5, 3, 3, 3, 2, 2, 2, 1, 2, 2, 2, 3, 3, 3, 5, 3, 2, 2, 2, 1, 1, 1, 0, 1, 1, 1, 2, 2, 2, 3];
+        const columnValuesHTML = document.getElementById("columnValues")
+        columnValues.forEach(columnValue => {
+            const value = document.createElement("div");
+            value.classList.add("square", "square-neutral");
+            const number = document.createElement("span")
+            number.classList.add("text");
+            number.insertAdjacentText('afterbegin', columnValue);
+            value.appendChild(number);
+            columnValuesHTML.appendChild(value);
+        })
 
-    const jokersHTML = document.getElementById("jokers")
-    for(i = 0; i < 8; i++)
-    {
-        const joker = document.createElement("div");
-        joker.classList.add("square", "square-neutral");
-        const symbol = document.createElement("span")
-        symbol.classList.add("text");
-        symbol.insertAdjacentText('afterbegin', "❕");
-        joker.appendChild(symbol);
-        jokersHTML.appendChild(joker);
-    }
-
-    const colourPointsHTML = document.getElementById("colour-points")
-    for(i = 0; i < 5; i++)
-    {
-        const squareLeft = document.createElement("div");
-        squareLeft.classList.add("square", `colour${i}`);
-        const pointsLeft = document.createElement("span")
-        pointsLeft.classList.add("text");
-        pointsLeft.insertAdjacentText('afterbegin', "5");
-        squareLeft.appendChild(pointsLeft);
-        colourPointsHTML.appendChild(squareLeft);
-
-        const squareRight = document.createElement("div");
-        squareRight.classList.add("square", `colour${i}`);
-        const pointsRight = document.createElement("span")
-        pointsRight.classList.add("text");
-        pointsRight.insertAdjacentText('afterbegin', "3");
-        squareRight.appendChild(pointsRight);
-        colourPointsHTML.appendChild(squareRight);
-    }
-
-</script>
-
-<script>
-    startupBoard = {board:[[0,1,1,2,2,2,0,0,1,1,1,4,4,4,4],[0,0,2,2,3,3,4,4,4,0,3,3,3,3,4],[4,4,3,3,4,3,2,4,3,0,1,1,1,1,1],[1,4,0,0,0,3,3,0,0,0,0,4,4,4,2],[0,4,0,3,3,1,2,2,2,3,3,3,3,3,2],[2,4,4,1,3,1,0,4,4,2,2,3,2,2,2],[2,2,2,1,1,1,0,0,0,0,1,1,1,1,2]], stars:[0,5,0,4,6,2,1,3,4,6,5,3,1,5,2]}
-    displayBoard(startupBoard.board, startupBoard.stars)
-    convertHTMLToImage();
-    hideHTMLBoard();
-    
-    function convertHTMLToImage() {
-        html2canvas(document.getElementById("outerBoard")).then(function (canvas) {	
-            document.getElementById("previewImg").appendChild(canvas);
-        });
-    }
-
-    function hideHTMLBoard() {
-        const htmlBoard = document.getElementById("outerBoard");
-        htmlBoard.hidden = true;
-    }
-
-    function showHTMLBoard() {
-        const htmlBoard = document.getElementById("outerBoard");
-        htmlBoard.hidden = false;
-    }
-
-    async function getBoard() {
-      try {
-        showLoader();
-        document.getElementById("generate-board-button").classList.add("disabled")
-        const response = await fetch('http://localhost:105/get-board');
-        const boardJson = await response.json();
-        document.getElementById("generate-board-button").classList.remove("disabled")
-        displayBoard(boardJson.board, boardJson.stars);
-        hideLoader();
-      } catch (error) {
-        return getBoard()
-      }
-    }
-
-    function showLoader() {
-        var loader = document.querySelector('.loader');
-        loader.removeAttribute("hidden"); 
-    }
-
-    function hideLoader() {
-        var loader = document.querySelector('.loader');
-        loader.setAttribute("hidden", "true");
-    }
-
-    function displayBoard(board, stars) {
-      const htmlBoard = document.getElementById("gameBoard");
-
-      htmlBoard.innerHTML = "";
-
-      for (let row = 0; row < board.length; row++) {
-          for (let column = 0; column < board[row].length; column++){
-            const hasStar = stars[column] == row;
-            const colour = board[row][column];
-            const isMiddle = column == 7;
-            const htmlSquare = makeSquare(colour, hasStar, isMiddle);
-            htmlBoard.appendChild(htmlSquare);
-          }
-        }
-    }
-
-    function makeSquare(colour, hasStar, isMiddle) {
-        const square = document.createElement("div");
-        square.classList.add("square")
-        square.classList.add("colour" + colour)
-        const image = document.createElement("img");
-        if (hasStar){
-            image.src = "./shapes/star.svg"
-            image.classList.add("star");
-            square.appendChild(image);
-
-            const innerStar = document.createElement("img");
-            innerStar.classList.add("filter" + colour);
-            innerStar.classList.add("star");
-            innerStar.src = ("./shapes/star-" + colour + ".svg")
-            square.appendChild(innerStar);
-        }
-        else{
-          image.src = "./shapes/circle.svg"
-          image.classList.add("circle")
-          square.appendChild(image);
-        }
-        if (isMiddle) {
-          const oldSquare = square;
-          const outerSquare = document.createElement("div");
-          outerSquare.classList.add("outerSquare");
-          outerSquare.appendChild(square);  
-          return outerSquare
+        const jokersHTML = document.getElementById("jokers")
+        for (i = 0; i < 8; i++) {
+            const joker = document.createElement("div");
+            joker.classList.add("square", "square-neutral");
+            const symbol = document.createElement("span")
+            symbol.classList.add("text");
+            symbol.insertAdjacentText('afterbegin', "❕");
+            joker.appendChild(symbol);
+            jokersHTML.appendChild(joker);
         }
 
-        return square
-    }
-</script> 
+        const colourPointsHTML = document.getElementById("colour-points")
+        for (i = 0; i < 5; i++) {
+            const squareLeft = document.createElement("div");
+            squareLeft.classList.add("square", `colour${i}`);
+            const pointsLeft = document.createElement("span")
+            pointsLeft.classList.add("text");
+            pointsLeft.insertAdjacentText('afterbegin', "5");
+            squareLeft.appendChild(pointsLeft);
+            colourPointsHTML.appendChild(squareLeft);
 
-<!-- Download board script -->
-<script> 
-    document.getElementById("generate-board-button").addEventListener("click", async function() {
-        await getBoard();
-        var oldImage = document.getElementById("previewImg");
-        oldImage.innerHTML = "" ;
-        showHTMLBoard();
+            const squareRight = document.createElement("div");
+            squareRight.classList.add("square", `colour${i}`);
+            const pointsRight = document.createElement("span")
+            pointsRight.classList.add("text");
+            pointsRight.insertAdjacentText('afterbegin', "3");
+            squareRight.appendChild(pointsRight);
+            colourPointsHTML.appendChild(squareRight);
+        }
+
+    </script>
+
+    <script>
+        startupBoard = { board: [[0, 1, 1, 2, 2, 2, 0, 0, 1, 1, 1, 4, 4, 4, 4], [0, 0, 2, 2, 3, 3, 4, 4, 4, 0, 3, 3, 3, 3, 4], [4, 4, 3, 3, 4, 3, 2, 4, 3, 0, 1, 1, 1, 1, 1], [1, 4, 0, 0, 0, 3, 3, 0, 0, 0, 0, 4, 4, 4, 2], [0, 4, 0, 3, 3, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2], [2, 4, 4, 1, 3, 1, 0, 4, 4, 2, 2, 3, 2, 2, 2], [2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 2]], stars: [0, 5, 0, 4, 6, 2, 1, 3, 4, 6, 5, 3, 1, 5, 2] }
+        displayBoard(startupBoard.board, startupBoard.stars)
         convertHTMLToImage();
         hideHTMLBoard();
-    });
-</script>
+
+        function convertHTMLToImage() {
+            html2canvas(document.getElementById("outerBoard")).then(function (canvas) {
+                document.getElementById("previewImg").appendChild(canvas);
+            });
+        }
+
+        function hideHTMLBoard() {
+            const htmlBoard = document.getElementById("outerBoard");
+            htmlBoard.hidden = true;
+        }
+
+        function showHTMLBoard() {
+            const htmlBoard = document.getElementById("outerBoard");
+            htmlBoard.hidden = false;
+        }
+
+        async function getBoard() {
+            try {
+                showLoader();
+                document.getElementById("generate-board-button").classList.add("disabled")
+                const response = await fetch('http://localhost:105/get-board');
+                const boardJson = await response.json();
+                document.getElementById("generate-board-button").classList.remove("disabled")
+                displayBoard(boardJson.board, boardJson.stars);
+                hideLoader();
+            } catch (error) {
+                return getBoard()
+            }
+        }
+
+        function showLoader() {
+            var loader = document.querySelector('.loader');
+            loader.removeAttribute("hidden");
+        }
+
+        function hideLoader() {
+            var loader = document.querySelector('.loader');
+            loader.setAttribute("hidden", "true");
+        }
+
+        function displayBoard(board, stars) {
+            const htmlBoard = document.getElementById("gameBoard");
+
+            htmlBoard.innerHTML = "";
+
+            for (let row = 0; row < board.length; row++) {
+                for (let column = 0; column < board[row].length; column++) {
+                    const hasStar = stars[column] == row;
+                    const colour = board[row][column];
+                    const isMiddle = column == 7;
+                    const htmlSquare = makeSquare(colour, hasStar, isMiddle);
+                    htmlBoard.appendChild(htmlSquare);
+                }
+            }
+        }
+
+        function makeSquare(colour, hasStar, isMiddle) {
+            const square = document.createElement("div");
+            square.classList.add("square")
+            square.classList.add("colour" + colour)
+            const image = document.createElement("img");
+            if (hasStar) {
+                image.src = "./shapes/star.svg"
+                image.classList.add("star");
+                square.appendChild(image);
+
+                const innerStar = document.createElement("img");
+                innerStar.classList.add("filter" + colour);
+                innerStar.classList.add("star");
+                innerStar.src = ("./shapes/star-" + colour + ".svg")
+                square.appendChild(innerStar);
+            }
+            else {
+                image.src = "./shapes/circle.svg"
+                image.classList.add("circle")
+                square.appendChild(image);
+            }
+            if (isMiddle) {
+                const oldSquare = square;
+                const outerSquare = document.createElement("div");
+                outerSquare.classList.add("outerSquare");
+                outerSquare.appendChild(square);
+                return outerSquare
+            }
+
+            return square
+        }
+    </script>
+
+    <!-- Download board script -->
+    <script>
+        document.getElementById("generate-board-button").addEventListener("click", async function () {
+            await getBoard();
+            var oldImage = document.getElementById("previewImg");
+            oldImage.innerHTML = "";
+            showHTMLBoard();
+            convertHTMLToImage();
+            hideHTMLBoard();
+        });
+    </script>
 
 
 </body>
-</html> 
+
+</html>
