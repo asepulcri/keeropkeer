@@ -190,3 +190,9 @@ canvas {
     display: flex;
     justify-content: center;
 }
+
+footer {
+    padding-top: 1em;
+    display: flex;
+    justify-content: center;
+}
