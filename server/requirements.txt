@@ -1,8 +1,5 @@
 numpy
-copy
 networkx
 typing
-random
-time
 flask
 flask-cors
