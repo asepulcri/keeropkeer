@@ -68,7 +68,7 @@ class DividerAlgorithm:
                 self.board[y_board + y, x_board + x - shape.leftmost_top_pixel[1]] += shape.config[y][x] * self.counter
 
     def pick_random_shape_size_between_1_and_6(self, decision_variable: ShapeDecisionVariable):
-        possible_shape_sizes: [int] = []
+        possible_shape_sizes = []
         for size in range(1, 7):
             if len(decision_variable.options[str(size)]) > 0 and self.number_of_shapes_per_size[str(size)] < 5:
                 possible_shape_sizes.append(size)
