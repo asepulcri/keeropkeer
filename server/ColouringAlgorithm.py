@@ -28,7 +28,7 @@ class ColouringAlgorithm:
 
         self.shape_numbers_per_size = [[] for i in range(6)]
 
-    def get_shape_properties(self, shape_number) -> (int, Set[int]):  # returns size and neighbouring numbers
+    def get_shape_properties(self, shape_number):  # returns size and neighbouring numbers
         indices_current_shape = np.where(self.board == shape_number)
         indices_current_shape = np.dstack(indices_current_shape)
         size_current_shape = np.count_nonzero(self.board == shape_number)
