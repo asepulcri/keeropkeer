@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/2b8af7e0-a548-4d1d-a45d-884f0d5a7b65/FunctionApp/subscriptions/2b8af7e0-a548-4d1d-a45d-884f0d5a7b65/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/keeropkeer",
+    "appService.deploySubpath": "server"
+}
