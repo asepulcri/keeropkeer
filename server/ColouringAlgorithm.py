@@ -1,7 +1,7 @@
 import numpy as np
 from typing import Set
 import networkx as nx
-from server.DecisionVariable import DecisionVariable
+from DecisionVariable import DecisionVariable
 from copy import deepcopy
 
 

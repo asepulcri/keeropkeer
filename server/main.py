@@ -1,6 +1,6 @@
-from server.DividerAlgorithm import *
-from server.ColouringAlgorithm import *
-from server.StarPlacingAlgorithm import *
+from DividerAlgorithm import *
+from ColouringAlgorithm import *
+from StarPlacingAlgorithm import *
 import time
 
 

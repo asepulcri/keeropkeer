@@ -1,9 +1,14 @@
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-from server.main import generate_board
+from main import generate_board
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
+@app.route("/")
+def index():
+    return "Hello World!"
 
 @app.route('/hello', methods=['GET', 'POST'])
 def welcome():
@@ -15,5 +20,5 @@ def get_board():
     return response
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=105)
+    app.run(host='0.0.0.0', port= int(os.environ.get('PORT', 8000)))
 
