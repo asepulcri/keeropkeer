@@ -1,7 +1,7 @@
 from typing import Dict
 
-from server.DecisionVariable import DecisionVariable
-from server.possible_shapes import *
+from DecisionVariable import DecisionVariable
+from possible_shapes import *
 import random
 from copy import deepcopy
 import time
@@ -29,6 +29,9 @@ class DividerAlgorithm:
     number_of_shapes_per_size: Dict[str, int]
     counter: int
 
+    six_blocks_picked: int
+    six_block_locations: List[List[Tuple[int, int]]]
+
     def __init__(self):
         self.board = np.array(np.zeros((BOARD_HEIGHT, BOARD_WIDTH)))
 
@@ -36,6 +39,9 @@ class DividerAlgorithm:
 
         self.number_of_shapes_per_size = {"1": 0, "2": 0, "3": 0, "4": 0, "5": 0, "6": 0}
         self.counter = 1
+
+        self.six_blocks_picked = 0
+        self.six_block_locations = [[], [], [], [], []]
 
     def find_next_coordinate_to_fill(self):
         for y in range(len(self.board)):
@@ -63,9 +69,18 @@ class DividerAlgorithm:
 
     def place_shape(self, shape: Shape):
         y_board, x_board = self.next_coordinate_to_fill
+
         for y in range(len(shape.config)):
             for x in range(len(shape.config[y])):
+
+                if shape.size == 6:
+                    if shape.config[y][x] == 1:
+                        self.six_block_locations[self.six_blocks_picked].append((x_board + x - shape.leftmost_top_pixel[1], y_board + y))
+
                 self.board[y_board + y, x_board + x - shape.leftmost_top_pixel[1]] += shape.config[y][x] * self.counter
+
+        if shape.size == 6:
+            self.six_blocks_picked += 1
 
     def pick_random_shape_size_between_1_and_6(self, decision_variable: ShapeDecisionVariable):
         possible_shape_sizes = []
@@ -83,11 +98,12 @@ class DividerAlgorithm:
         start_time = time.time()
         iterations = 0
         while self.counter < 31:
-            if (time.time() - start_time) > 5:
-                return None
+            # if (time.time() - start_time) > 5:
+            #     return None
             iterations += 1
             next_decision_variable = self.decision_variables[self.counter - 1]
             picked_shape_size_between_1_and_6 = self.pick_random_shape_size_between_1_and_6(next_decision_variable)
+
             # Step back if there are no available options
             if picked_shape_size_between_1_and_6 == -1:
                 next_decision_variable.options = deepcopy(all_shapes)
@@ -95,12 +111,15 @@ class DividerAlgorithm:
                 self.board[self.board == self.counter - 1] = 0
                 self.counter -= 1
                 continue
+
             picked_shape = random.choice(next_decision_variable.options[str(picked_shape_size_between_1_and_6)])
             next_decision_variable.options[str(picked_shape_size_between_1_and_6)].remove(picked_shape)
             successful_placement_possible: bool = self.try_to_place(picked_shape)
+
             if successful_placement_possible:
                 next_decision_variable.pick_shape(picked_shape)
+
                 self.number_of_shapes_per_size[str(picked_shape_size_between_1_and_6)] += 1
                 self.counter += 1
-        
-        return np.transpose(self.board)
+
+        return (np.transpose(self.board), self.six_block_locations)

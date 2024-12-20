@@ -55,10 +55,10 @@
                     <div class="words text"><span>A-O</span></div>
                     <div class="sum text"><span>+</span></div>
 
-                    <div class="words text"><span>❕ (+1)</span></div>
+                    <div class="words text"><span>! (+1)</span></div>
                     <div class="sum text"><span>+</span></div>
 
-                    <div class="words text"><span>⭐ (-2)</span></div>
+                    <div class="words text"><span>* (-2)</span></div>
                     <div class="sum text"><span>-</span></div>
 
                     <div class="words text"><span>TOTAL</span></div>
@@ -116,7 +116,7 @@
             joker.classList.add("square", "square-neutral");
             const symbol = document.createElement("span")
             symbol.classList.add("text");
-            symbol.insertAdjacentText('afterbegin', "❕");
+            symbol.insertAdjacentText('afterbegin', "!");
             joker.appendChild(symbol);
             jokersHTML.appendChild(joker);
         }
@@ -196,6 +196,7 @@
             for (let row = 0; row < board.length; row++) {
                 for (let column = 0; column < board[row].length; column++) {
                     const hasStar = stars[column] == row;
+                    const hasBox =
                     const colour = board[row][column];
                     const isMiddle = column == 7;
                     const htmlSquare = makeSquare(colour, hasStar, isMiddle);

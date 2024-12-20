@@ -1,13 +1,15 @@
-from server.DividerAlgorithm import *
-from server.ColouringAlgorithm import *
-from server.StarPlacingAlgorithm import *
+from DividerAlgorithm import *
+from ColouringAlgorithm import *
+from StarPlacingAlgorithm import *
+from BoxPlacingAlgorithm import *
 import time
+import copy
 
 
 def generate_board():
     try:
         start_time = time.time()
-        divided_board = DividerAlgorithm().run()
+        divided_board, six_block_locations = DividerAlgorithm().run()
         if divided_board is None:
             exit("Ran out of time")
 
@@ -24,7 +26,13 @@ def generate_board():
 
         coloured_board = np.vectorize(shape_to_colour_dict.get)(divided_board)
 
-        return {"board": coloured_board.tolist(), "stars": star_placement}
+        star_placement_copy = copy.deepcopy(star_placement)
+
+        special_box_placement = BoxPlacingAlgorithm(six_block_locations, star_placement_copy).run()
+
+        return {"board": coloured_board.tolist(), "stars": star_placement, "boxes": special_box_placement}
 
     except Exception:
         return generate_board()
+
+print(generate_board())
