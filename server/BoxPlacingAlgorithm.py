@@ -21,7 +21,7 @@ class BoxPlacingAlgorithm:
                 picked_box = random.choice(self.block_locations[self.current_shape_index])
 
                 if self.star_locations[picked_box[1]] != picked_box[0]:
-                    self.special_box_locations.append(picked_box)
+                    self.special_box_locations.append(list(picked_box))
                     picked = True
                     self.current_shape_index += 1
 

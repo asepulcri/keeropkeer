@@ -173,6 +173,13 @@ main {
     top: 5%;
 }
 
+.box {
+    width: 90%;
+    position: absolute;
+    left: 5%;
+    top: 5%;
+}
+
 .star:nth-child(2) {
     width: 66%;
     opacity: 30%;

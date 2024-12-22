@@ -143,8 +143,8 @@
     </script>
 
     <script>
-        startupBoard = { board: [[0, 1, 1, 2, 2, 2, 0, 0, 1, 1, 1, 4, 4, 4, 4], [0, 0, 2, 2, 3, 3, 4, 4, 4, 0, 3, 3, 3, 3, 4], [4, 4, 3, 3, 4, 3, 2, 4, 3, 0, 1, 1, 1, 1, 1], [1, 4, 0, 0, 0, 3, 3, 0, 0, 0, 0, 4, 4, 4, 2], [0, 4, 0, 3, 3, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2], [2, 4, 4, 1, 3, 1, 0, 4, 4, 2, 2, 3, 2, 2, 2], [2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 2]], stars: [0, 5, 0, 4, 6, 2, 1, 3, 4, 6, 5, 3, 1, 5, 2] }
-        displayBoard(startupBoard.board, startupBoard.stars)
+        startupBoard = { board: [[0, 1, 1, 2, 2, 2, 0, 0, 1, 1, 1, 4, 4, 4, 4], [0, 0, 2, 2, 3, 3, 4, 4, 4, 0, 3, 3, 3, 3, 4], [4, 4, 3, 3, 4, 3, 2, 4, 3, 0, 1, 1, 1, 1, 1], [1, 4, 0, 0, 0, 3, 3, 0, 0, 0, 0, 4, 4, 4, 2], [0, 4, 0, 3, 3, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2], [2, 4, 4, 1, 3, 1, 0, 4, 4, 2, 2, 3, 2, 2, 2], [2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 2]], stars: [0, 5, 0, 4, 6, 2, 1, 3, 4, 6, 5, 3, 1, 5, 2], boxes: [[2, 0], [4, 5], [2, 10], [4, 9], [5, 6], [6, 14]] }
+        displayBoard(startupBoard.board, startupBoard.stars, startupBoard.boxes)
         convertHTMLToImage();
         hideHTMLBoard();
 
@@ -188,7 +188,13 @@
             loader.setAttribute("hidden", "true");
         }
 
-        function displayBoard(board, stars) {
+        function containsArray(outerArray, targetArray) {
+            return outerArray.some(innerArray =>
+            innerArray.length === targetArray.length &&
+            innerArray.every((value, index) => value === targetArray[index]));
+        }
+
+        function displayBoard(board, stars, boxes) {
             const htmlBoard = document.getElementById("gameBoard");
 
             htmlBoard.innerHTML = "";
@@ -196,20 +202,21 @@
             for (let row = 0; row < board.length; row++) {
                 for (let column = 0; column < board[row].length; column++) {
                     const hasStar = stars[column] == row;
-                    const hasBox =
+                    const hasBox = containsArray(boxes, [row, column]);
                     const colour = board[row][column];
                     const isMiddle = column == 7;
-                    const htmlSquare = makeSquare(colour, hasStar, isMiddle);
+                    const htmlSquare = makeSquare(colour, hasStar, hasBox, isMiddle);
                     htmlBoard.appendChild(htmlSquare);
                 }
             }
         }
 
-        function makeSquare(colour, hasStar, isMiddle) {
+        function makeSquare(colour, hasStar, hasBox, isMiddle) {
             const square = document.createElement("div");
             square.classList.add("square")
             square.classList.add("colour" + colour)
             const image = document.createElement("img");
+
             if (hasStar) {
                 image.src = "./shapes/star.svg"
                 image.classList.add("star");
@@ -221,11 +228,25 @@
                 innerStar.src = ("./shapes/star-" + colour + ".svg")
                 square.appendChild(innerStar);
             }
+
             else {
                 image.src = "./shapes/circle.svg"
                 image.classList.add("circle")
                 square.appendChild(image);
             }
+
+            if (hasBox) {
+                image.src = "./shapes/star.svg"
+                image.classList.add("star");
+                square.appendChild(image);
+
+                const innerStar = document.createElement("img");
+                innerStar.classList.add("filter" + colour);
+                innerStar.classList.add("star");
+                innerStar.src = ("./shapes/star-" + colour + ".svg")
+                square.appendChild(innerStar);
+            }
+
             if (isMiddle) {
                 const oldSquare = square;
                 const outerSquare = document.createElement("div");
