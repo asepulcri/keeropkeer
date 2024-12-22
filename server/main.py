@@ -34,5 +34,3 @@ def generate_board():
 
     except Exception:
         return generate_board()
-
-print(generate_board())

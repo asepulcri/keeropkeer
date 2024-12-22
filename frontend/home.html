@@ -143,7 +143,7 @@
     </script>
 
     <script>
-        startupBoard = { board: [[0, 1, 1, 2, 2, 2, 0, 0, 1, 1, 1, 4, 4, 4, 4], [0, 0, 2, 2, 3, 3, 4, 4, 4, 0, 3, 3, 3, 3, 4], [4, 4, 3, 3, 4, 3, 2, 4, 3, 0, 1, 1, 1, 1, 1], [1, 4, 0, 0, 0, 3, 3, 0, 0, 0, 0, 4, 4, 4, 2], [0, 4, 0, 3, 3, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2], [2, 4, 4, 1, 3, 1, 0, 4, 4, 2, 2, 3, 2, 2, 2], [2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 2]], stars: [0, 5, 0, 4, 6, 2, 1, 3, 4, 6, 5, 3, 1, 5, 2], boxes: [[2, 0], [4, 5], [2, 10], [4, 9], [5, 6], [6, 14]] }
+        startupBoard = { board: [[0, 1, 1, 2, 2, 2, 0, 0, 1, 1, 1, 4, 4, 4, 4], [0, 0, 2, 2, 3, 3, 4, 4, 4, 0, 3, 3, 3, 3, 4], [4, 4, 3, 3, 4, 3, 2, 4, 3, 0, 1, 1, 1, 1, 1], [1, 4, 0, 0, 0, 3, 3, 0, 0, 0, 0, 4, 4, 4, 2], [0, 4, 0, 3, 3, 1, 2, 2, 2, 3, 3, 3, 3, 3, 2], [2, 4, 4, 1, 3, 1, 0, 4, 4, 2, 2, 3, 2, 2, 2], [2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 2]],  stars: [0, 5, 0, 4, 6, 2, 1, 3, 4, 6, 5, 3, 1, 5, 2], boxes: [[2, 0], [4, 5], [2, 10], [4, 9], [5, 6], [6, 14]] }
         displayBoard(startupBoard.board, startupBoard.stars, startupBoard.boxes)
         convertHTMLToImage();
         hideHTMLBoard();
@@ -156,7 +156,7 @@
 
         function hideHTMLBoard() {
             const htmlBoard = document.getElementById("outerBoard");
-            htmlBoard.hidden = true;
+            htmlBoard.hidden = false;
         }
 
         function showHTMLBoard() {
@@ -171,7 +171,7 @@
                 const response = await fetch('http://localhost:105/get-board');
                 const boardJson = await response.json();
                 document.getElementById("generate-board-button").classList.remove("disabled")
-                displayBoard(boardJson.board, boardJson.stars);
+                displayBoard(boardJson.board, boardJson.stars, boardJson.boxes);
                 hideLoader();
             } catch (error) {
                 return getBoard()
@@ -236,15 +236,9 @@
             }
 
             if (hasBox) {
-                image.src = "./shapes/star.svg"
-                image.classList.add("star");
+                image.src = "./shapes/box.svg"
+                image.classList.add("box");
                 square.appendChild(image);
-
-                const innerStar = document.createElement("img");
-                innerStar.classList.add("filter" + colour);
-                innerStar.classList.add("star");
-                innerStar.src = ("./shapes/star-" + colour + ".svg")
-                square.appendChild(innerStar);
             }
 
             if (isMiddle) {
@@ -266,7 +260,7 @@
             var oldImage = document.getElementById("previewImg");
             oldImage.innerHTML = "";
             showHTMLBoard();
-            convertHTMLToImage();
+<!--            convertHTMLToImage();-->
             hideHTMLBoard();
         });
     </script>
